@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ACL.h"
+#include "ACL/ACL.h"
 
 class Person: public Entity{
 public:
@@ -19,7 +19,7 @@ int main(){
     Document file{"Arenda"};
     Person Ivan{"Ivan"};
     ACL<Person, Document, std::string> acl;
-    
+
     acl.AddEntity(Ivan.get_id(), file, "owner");
 
     std::cout << acl.GetAccessMode(Ivan.get_id(), file);
