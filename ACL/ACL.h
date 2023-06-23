@@ -1,5 +1,7 @@
 #pragma once
-#include "../DB/pgback.h"
+
+#include <unordered_map>
+#include <utility>
 
 struct Entity{
     using type_id = size_t;
@@ -27,10 +29,11 @@ public:
 
     void AddEntity(EntityId const& e, Resource const& r, AccessMode m);
     void DelEntity(EntityId const& e);
-    char* GetAccessMode(EntityId const& e, Resource const& r) const;
+    AccessMode GetAccessMode(EntityId const& e, Resource const& r) const;
     void SetAccessMode(EntityId const& e, Resource const& r);
+    std::vector<Resource> GetResources(EntityId const& e);
 
-    inline static auto pgbackend = std::make_shared<PGBackend>();
+    std::unordered_map<std::pair<EntityId, Resource>, AccessMode> base;
 };
 
 #include "ACL.hpp"

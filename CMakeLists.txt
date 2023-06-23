@@ -6,8 +6,4 @@ project(${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-add_subdirectory(DB)
-
-target_include_directories(${PROJECT_NAME} PUBLIC DB)
-
-target_link_libraries(${PROJECT_NAME} pq pthread pgback)
+target_link_libraries(${PROJECT_NAME} pthread)
