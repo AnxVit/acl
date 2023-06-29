@@ -4,9 +4,10 @@
 #include <unordered_map>
 #include <utility>
 #include <memory>
+#include <string>
 
 struct Entity{
-    using type_id = size_t;
+    using type_id = unsigned int;
     
     Entity():id(++id_g){};
     virtual ~Entity() = default;
