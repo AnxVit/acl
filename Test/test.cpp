@@ -19,7 +19,7 @@ public:
 
 void run_test(){
     try{
-        test_add();
+        test_set_access();
     }
     catch(const std::runtime_error& ex){
         std::cerr << ex.what();
@@ -80,7 +80,8 @@ void test_set_access(){
     ACL<Person, Document, std::string> acl;
     
     acl.AddEntity(man1.get_id(), file1, "owner");
-    acl.SetAccessMode(man1.get_id(), file2, "user");
-    std::cout << acl.GetAccessMode(man1.get_id(), file2) << std::endl;
-    acl.SetAccessMode(man2.get_id(), file1, "owner");
+    std::cout << "man1: " << acl.GetAccessMode(man1.get_id(), file1) << std::endl;
+
+    acl.SetAccessMode(man1.get_id(), file1, "user");
+    std::cout << "man1: " << acl.GetAccessMode(man1.get_id(), file1) << std::endl;
 }

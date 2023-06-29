@@ -42,10 +42,7 @@ void ACL<Entity, Resource, AccessMode>::SetAccessMode(EntityId const& e, Resourc
         auto [first, last] = base.equal_range(e);
         for(auto it = first; it != last; ++it){
             if(it->second.first == name){
-                std::pair<std::string, AccessMode> p = {name, it->second.second};
-                auto nh = base.extract(it);
-                nh.value(p);
-                base.insert(std::move(nh));
+                it->second.second = m;
             }
         }
     }
