@@ -1,7 +1,9 @@
 #pragma once
 
+#include <vector>
 #include <unordered_map>
 #include <utility>
+#include <memory>
 
 struct Entity{
     using type_id = size_t;
@@ -18,7 +20,8 @@ private:
 
 struct Resource{
     virtual ~Resource() = default;
-    virtual std::string get_name() const = 0;
+    std::string get_name() const { return m_name;}
+    std::string m_name;
 };
 
 template<class Entity, class Resource, class AccessMode = bool>
@@ -30,10 +33,9 @@ public:
     void AddEntity(EntityId const& e, Resource const& r, AccessMode m);
     void DelEntity(EntityId const& e);
     AccessMode GetAccessMode(EntityId const& e, Resource const& r) const;
-    void SetAccessMode(EntityId const& e, Resource const& r);
-    std::vector<Resource> GetResources(EntityId const& e);
+    void SetAccessMode(EntityId const& e, Resource const& r, AccessMode m);
 
-    std::unordered_map<std::pair<EntityId, Resource>, AccessMode> base;
+    std::unordered_multimap<EntityId, std::pair<std::string, AccessMode>> base;
 };
 
 #include "ACL.hpp"

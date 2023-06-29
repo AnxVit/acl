@@ -10,9 +10,9 @@ public:
 
 class Document: public Resource{
 public:
-    Document(std::string name): m_name(name) {}
-    std::string get_name() const override {return m_name;}
-    std::string m_name;
+    Document(std::string name){
+        m_name = name;
+    }
 };
 
 int main(){
